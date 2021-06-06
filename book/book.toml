@@ -1,0 +1,9 @@
+[book]
+authors = ["basstabs"]
+language = "en"
+multilingual = false
+src = "src"
+title = "A Trig-less Line of Sight Algorithm in Two Dimensions"
+
+[output.html]
+mathjax-support = true
