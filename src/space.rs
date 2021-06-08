@@ -14,7 +14,7 @@ pub struct Point
 impl Point
 {
 
-	pub fn dot(&self, other: Point) -> f32
+	pub fn dot(&self, other: &Point) -> f32
 	{
 
 		return self.x * other.x + self.y * other.y;
@@ -59,27 +59,30 @@ impl Point
 	}
     //ANCHOR_END: exclusion
 
-	//Works so long as all represented angles are between from and from+pi
-	pub fn sort_from_angle(rays: &mut Vec<Point>, from: Point)
+    // ANCHOR: sorting_function
+	//Works so long as all represented angles are between lower and lower+pi
+	pub fn sort_from_angle(rays: &mut Vec<Point>, lower: Point)
 	{
 
 		rays.sort_unstable_by(|a, b|
 		{
 
+            // ANCHOR: compare 
 			//We want to order by angle from lower, which is the same as reverse ordering by normalized projections along lower
 			//We do some algebra to avoid computing square roots for the normalization, i.e. a dot L/|a|>b dot L/|b| if and only if
 			// a dot L*|a dot L|*|b|^2 > b dot L * |b dot L| * |a|^2
-			let a_dot_f = from.dot(*a);
-			let lhs = a_dot_f.abs() * a_dot_f * (b.x * b.x + b.y * b.y);
+			let a_dot_l = lower.dot(a);
+			let lhs = a_dot_l.abs() * a_dot_l * (b.x * b.x + b.y * b.y);
 
-			let b_dot_f = from.dot(*b);
-			let rhs = b_dot_f.abs() * b_dot_f * (a.x * a.x + a.y * a.y);
-
+			let b_dot_l = lower.dot(b);
+			let rhs = b_dot_l.abs() * b_dot_l * (a.x * a.x + a.y * a.y);
+            // ANCHOR_END: compare
 			return rhs.partial_cmp(&lhs).unwrap();
 
 		});
 
 	}
+    // ANCHOR_END: sorting_function
 
 }
 
@@ -219,6 +222,7 @@ mod tests
 
 	use super::*;
 
+    // ANCHOR: sort
 	#[test]
 	fn angle_sort()
 	{
@@ -229,7 +233,8 @@ mod tests
 		assert_eq!(rays, vec![Point { x: 1.0, y: 0.2 }, Point { x: 1.0, y: 1.0 }, Point { x: 2.0, y: 4.0 }, Point { x: 0.0, y: 1.0 }, Point { x: -1.0, y: 1.0 }]);
 
 	}
-    
+    // ANCHOR_END: sort
+
     // ANCHOR: ray_test
 	#[test]
 	fn ray_between()

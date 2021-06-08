@@ -33,9 +33,11 @@ pub fn generate_line_of_sight(location: Point, upper: Point, lower: Point, segme
 	}
     // ANCHOR_END: section1
 
-	//Sort the rays from lower to upper
+    // ANCHOR: sort
+    //Sort the rays from lower to upper
 	Point::sort_from_angle(&mut rays, lower);
-	
+    // ANCHOR_END: sort
+    //
 	//Actually create the triangles
 	let mut line_of_sight: Vec<Triangle> = Vec::new();
 
