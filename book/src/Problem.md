@@ -18,4 +18,4 @@ We shall split the problem into three discrete steps.
 2. Sort the rays so that the ray defined via \\(\vec{l}\\) is the least and they increase by angle towards \\(\vec{u}\\).
 3. Determine how far along each ray we should travel and use that to define the triangles whose union is the visible area.
 
-We will cover each step in its own section, first covering the math behind the code then walking through the code itself. We will also provide test code to verify that our math and code are behaving like we expect them to.
+We will cover each step in its own section, first covering the math behind the code then walking through the code itself. We will also provide test code to verify that our math and code are behaving like we expect them to. In general we shall assume that our given vectors are non-zero while we are theory-crafting.

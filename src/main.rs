@@ -122,7 +122,6 @@ impl event::EventHandler for State
         //Generate our new line of sight
         self.sight = sight::generate_line_of_sight(self.location, self.upper, self.lower, &self.walls); 
         
-        let mut vertices: Vec<Vec2> = Vec::new();
         let mb = &mut graphics::MeshBuilder::new();
         for triangle in self.sight.iter()
         {

@@ -7,3 +7,5 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+ggez = "0.6.0-rc1" # Need this to avoid mouse over bug causing panic
+glam = {version = "0.15", features = ["mint"]}

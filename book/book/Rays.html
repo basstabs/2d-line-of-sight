@@ -98,7 +98,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="Problem.html">The Problem</a></li><li class="chapter-item expanded affix "><a href="Rays.html" class="active">Sending out Rays</a></li><li class="chapter-item expanded affix "><a href="Angle.html">Sorting by Angle</a></li><li class="chapter-item expanded affix "><a href="Intersection.html">Finding Intersection Points</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="Introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="Problem.html">The Problem</a></li><li class="chapter-item expanded affix "><a href="Rays.html" class="active">Sending out Rays</a></li><li class="chapter-item expanded affix "><a href="Angle.html">Sorting by Angle</a></li><li class="chapter-item expanded affix "><a href="Final.html">Finding Intersection Points</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -300,9 +300,9 @@
 
 	}
 <span class="boring">
-</span><span class="boring">	//Sort the rays from lower to upper
+</span><span class="boring">    //Sort the rays from lower to upper
 </span><span class="boring">	Point::sort_from_angle(&amp;mut rays, lower);
-</span><span class="boring">	
+</span><span class="boring">    //
 </span><span class="boring">	//Actually create the triangles
 </span><span class="boring">	let mut line_of_sight: Vec&lt;Triangle&gt; = Vec::new();
 </span><span class="boring">
@@ -337,7 +337,7 @@
 </span><span class="boring">}
 </span><span class="boring">}
 </span></code></pre></pre>
-<p>We create a new vector (Rust's version of a resizable array) to store our rays in, then add <code>upper</code> and <code>lower</code> to it. From here, we iterate through over each <code>segment</code> in the vector of <code>Segement</code>s which is passed into the function. <code>Segment</code> is a struct simply containing a <code>start</code> <code>Point</code> and an <code>end</code> <code>Point</code>. For each <code>segment</code>, we generate a ray between our location and both endpoints. We use <code>ray_between</code> to only accept rays which are between <code>upper</code> and <code>lower</code> in our collection.</p>
+<p>We create a new vector (Rust's version of a resizable array) to store our rays in, then add <code>upper</code> and <code>lower</code> to it. From here, we iterate over each <code>segment</code> in the vector of <code>Segement</code>s which is passed into the function. <code>Segment</code> is a struct simply containing a <code>start</code> <code>Point</code> and an <code>end</code> <code>Point</code>. For each <code>segment</code>, we generate a ray between our location and both endpoints. We use <code>ray_between</code> to only accept rays which are between <code>upper</code> and <code>lower</code> in our collection.</p>
 <p>Now we're ready to move on to the second part of our algorithm: sorting this collection of rays by angle.</p>
 <h2 id="potential-improvements"><a class="header" href="#potential-improvements">Potential Improvements</a></h2>
 <ol>
