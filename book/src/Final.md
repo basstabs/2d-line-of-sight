@@ -79,7 +79,7 @@ We create a new collection to store the triangles that will represent our line o
 
 To find the closest line segment they both intersect with, we loop over all of our line segments and find out how far the rays travel with the `raycast` function. We ignore the line segment if one of the rays does not intersect with it, or if they intersect but it is further away than some previous one. Once we've found the closest line segment, we form our triangle. It is worth noting that because our ray vectors are not unit vectors, the result of `raycast` will not be the distance away from our point: it will be the distance scaled by the length of the vector. As we only care about comparing whether one line segment is closer than another, though, this suffices.
 
-Here is an example of this algorithm in action.
+Here is a low-quality GIF of this algorithm in action.
 
 ![Line of Sight GIF](./images/example.gif "A gif showcasing an example of the algorithm in action.")
 
