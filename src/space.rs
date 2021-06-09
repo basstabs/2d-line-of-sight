@@ -139,6 +139,7 @@ impl Segment
 
 	}
 
+    // ANCHOR: raycast
 	pub fn raycast(&self, location: Point, ray: Point) -> Option<f32>
 	{
 
@@ -193,6 +194,7 @@ impl Segment
 		return Some(ray_param);
 
 	}
+    // ANCHOR_END: raycast
 
 }
 
@@ -262,6 +264,7 @@ mod tests
 	}
     // ANCHOR_END: ray_test
 
+    // ANCHOR: raycast_test
 	#[test]
 	fn raycast()
 	{
@@ -287,5 +290,6 @@ mod tests
 		assert!(cast6.is_none());
 
 	}
+    // ANCHOR_END: raycast_test
 
 }

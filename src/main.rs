@@ -53,6 +53,7 @@ impl State
         walls.push(Segment::new(Point { x: 75.0, y: 325.0 }, Point { x: 50.0, y: 325.0 }));
         walls.push(Segment::new(Point { x: 50.0, y: 325.0 }, Point { x: 50.0, y: 300.0 }));
         walls.push(Segment::new(Point { x: 280.0, y: 240.0}, Point { x: 280.0, y: 260.0 }));
+        walls.push(Segment::new(Point { x: 450.0, y: 5.0 + WORLD_HEIGHT * 0.5 }, Point {x : 700.0, y: 5.0 + WORLD_HEIGHT * 0.5 }));
 
         let mb = &mut graphics::MeshBuilder::new();
         for segment in walls.iter()
