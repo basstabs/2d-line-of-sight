@@ -1,10 +1,10 @@
-# Sortine by Angle
+# Sorting by Angle
 
-![Unsorted list of rays](./images/unsorted.png "Our collection of rays unsorted")
+![Unsorted list of rays](./images/unsorted.png "Our collection of rays with their indices, unsorted")
 
-At this point, we've created a collection of rays emanating from \\(P\\). Our goal will be to find where these rays intersect with the line segments blocking our view, and then connect the adjacent intersection points to create a sequence of triangles which represent our field of view. To do this, we'll need to sort our collection of rays via increasing angle so that we'll know which rays are neighbors.
+At this point, we've created a collection of rays emanating from \\(P\\), all of which lie within our viewing angle. Our goal will be to find where these rays intersect with the line segments blocking our view, and then connect the adjacent intersection points to create a sequence of triangles which represent our field of view. To do this, we'll need to sort our collection of rays via increasing angle so that we'll know which rays are neighbors.
 
-![Sorted list of rays](./images/sorted.png "Our collection of rays now sorted")
+![Sorted list of rays](./images/sorted.png "Our collection of rays with their indices, now sorted")
 
 ## Sorting by Vector Components
 

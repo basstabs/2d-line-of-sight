@@ -1,14 +1,14 @@
 # The Problem
 
-We are given a point \\(P\\) in space and an angle \\(0<\theta\leq\pi\\) and direction \\(\vec{v}\\). Our goal is to bound the region that can be seen from \\(P\\) while looking in the direction of \\(\vec{v}\\) with field of view \\(\theta\\). Our eyesight is not bounded by distance. (See [[2](https://legends2k.github.io/2d-fov/design.html)] for a treatment where the distance is bounded.)
+We are given a point \\(P\\) in space, an angle \\(0<\theta\leq\pi\\), and a direction \\(\vec{v}\\). Our goal is to bound the region that can be seen from \\(P\\) while looking in the direction of \\(\vec{v}\\) with field of view \\(\theta\\). Our eyesight is not bounded by distance. (See [[2](https://legends2k.github.io/2d-fov/design.html)] for a treatment where the distance is bounded.)
 
 ![Problem Setup](./images/problem.png "An example problem")
 
-As our over-arching goal is to avoid using trigonometric functions, we will not actually use an angle and viewing direction to represent the problem. Instead, we shall store two vectors which bound the viewing region: \\(\vec{l}\\) (for "lower") and \\(\vec{u}\\) (for "upper").
+As our over-arching goal is to avoid using complex functions like trig functions or square roots, we will not actually use an angle and viewing direction to represent the problem. Instead, we shall store two vectors which bound the viewing region: \\(\vec{l}\\) (for "lower") and \\(\vec{u}\\) (for "upper"), where the angle from \\(\vec{l}\\) to \\(\vec{u}\\) is larger than zero and no larger than \\(\pi\\).
 
 ![Problem Revision](./images/problemvectors.png "The example redefined using u and l")
 
-For our function to work, we need \\(P\\), \\(\vec{l}\\), \\(\vec{u}\\), and a list of line segments which represent all of the solid objects we can't see through. How you generate this list will depend on what shapes you are using to define your objects and which objects should and should not block vision. For the sake of efficiency, it might be worthwhile to store all static line segments (such as those coming from walls) and update only dynamic line segments (such as those coming from characters) each frame.
+For our algorithm to work, we need \\(P\\), \\(\vec{l}\\), \\(\vec{u}\\), and a list of line segments which represent all of the solid objects we can't see through. How you generate this list will depend on what shapes you are using to define your objects and which objects should and should not block visibility. For the sake of efficiency, it might be worthwhile to store all static line segments (such as those coming from walls) and update only dynamic line segments (such as those coming from characters) each frame.
 
 # Solution Outline
 

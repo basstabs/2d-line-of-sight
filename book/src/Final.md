@@ -5,7 +5,7 @@ Up to this point, we have used the terms vector and ray more or less interchange
 In other words, the ray is an "infinite vector" which is obtained by scaling \\(\vec{v}\\) by every positive real number. 
 
 Line segments, on the other hand, are finite pieces of lines contained between two points on the line. Given two points \\(S\\) (start) and \\(E\\) (end), we can represent the line segment \\(\vec{SE}\\) via
-\\[(1-s)S+sE, 0\leq s\leq 1\\]
+\\[(1-s)S+sE,\ 0\leq s\leq 1\\]
 We want to figure out where (if anywhere) a given ray and a given line segment intersect.
 
 ## Raycasting
@@ -27,7 +27,7 @@ and
 So long as \\(\vec{v}\\) is not the zero vector, then we will be able to solve for \\(t\\) given \\(s\\) using at least one of the above equations.
 
 We plug in one of the above expressions for \\(t\\) in the other equation. We shall use the \\(y\\) equation and substitute it into the \\(x\\) equation. This gives us
-\\[P\_x+\frac{(1-s)S\_y+sE\_y-P\_y}{\vec{v}\_y}\vec{v}\_x=(1-s)S\_x+sE\_x\\]
+\\[P\_x+\frac{(1-s)S\_y+sE\_y-P\_y}{\vec{v}\_y}*\vec{v}\_x=(1-s)S\_x+sE\_x\\]
 We multiply through by \\(\vec{v}\_y\\) to eliminate the denominator, yielding
 \\[P\_x\vec{v}\_y+(1-s)S\_y\vec{v}\_x+sE\_y\vec{v}\_x-P\_y\vec{v}\_x=(1-s)S\_x\vec{v}\_y+sE\_x\vec{v}\_y\\]
 Next, we combine the terms with an \\(s\\) on one side of the equality, and the ones without an \\(s\\) on the other:
@@ -75,21 +75,25 @@ Finally, we have all of the pieces necessary to finish our line of sight algorit
 
 We create a new collection to store the triangles that will represent our line of sight. We then loop through our rays, forming a triangle whose edges are the current ray, the next ray, and the closest line segment that they both hit.
 
->In Rust, we usually traverse a vector using an iterator rather than incrementing an index. In this case, though, we want easy access to the next item at every step and we don't want to do anything for the last ray, so we use the index to give ourselves control in a way that is more familiar to non-Rustaceans.
+>In Rust, we usually traverse a `Vec` type using an iterator rather than incrementing an index. In this case, though, we want easy access to the next item at every step and we don't want to do anything for the last ray, so we use the index to give ourselves control in a way that is more familiar to non-Rustaceans.
 
 To find the closest line segment they both intersect with, we loop over all of our line segments and find out how far the rays travel with the `raycast` function. We ignore the line segment if one of the rays does not intersect with it, or if they intersect but it is further away than some previous one. Once we've found the closest line segment, we form our triangle. It is worth noting that because our ray vectors are not unit vectors, the result of `raycast` will not be the distance away from our point: it will be the distance scaled by the length of the vector. As we only care about comparing whether one line segment is closer than another, though, this suffices.
+
+Finally, we have created a collection of triangles which represents our line of sight.
+
+![Final line of sight representation](./images/final.png "Our line of sight represented as a list of triangles")
 
 Here is a low-quality GIF of this algorithm in action.
 
 ![Line of Sight GIF](./images/example.gif "A gif showcasing an example of the algorithm in action.")
 
-The example was created using the [ggez](https://crates.io/crates/ggez) crate. Interested users can download the example from the [repository](https://github.com/basstabs/2d-line-of-sight) and build it with cargo. The world creation is all done in the `State::new` function inside main.rs if you are interested in playing around with it. At this time, the provided code is not a crate because there is nothing that I consider ready to use out of the box. You should use the provided code as inspiration to implement your own algorithm which is optimized for your specific use case.
+The example was created using the [ggez](https://crates.io/crates/ggez) crate. Interested users can download the example from the [repository](https://github.com/basstabs/2d-line-of-sight) and build it with cargo. The world is created in the `State::new` function inside main.rs if you are interested in modifying the example. At this time, the provided code is not a crate because there is nothing that I consider ready to use out of the box. You should use the provided code as inspiration to implement your own algorithm which is optimized for your specific use case.
 
 ## Potential Improvements
 
 1. In our `raycast` function, it is probably overkill to `panic` and halt program execution. We could just as easily return `None` or possibly make the function return a `Result<f32>` with coherent errors when there is no intersection.
 2. One common technique in line of sight algorithms is to throw out extra rays very close to those which hit endpoints. (For example, as described in [[1](https://ncase.me/sight-and-light/)]) This enables us to only raycast once per line segment as opposed to twice. We have ommitted this technique for the sake of accuracy, but it is likely faster and accurate enough for most use cases.
-3. Additionally, we may be able to sort the line segments by their angle from our position in such a way that we needn't loop over all of them for each ray. Such a technique is talked about in [[3](https://www.redblobgames.com/articles/visibility/)].
+3. Additionally, we may be able to sort the line segments by their angle from our position in such a way that we needn't loop over all of them for each ray. Such a technique is discussed in [[3](https://www.redblobgames.com/articles/visibility/)].
 
 ## Conclusion
 

@@ -168,10 +168,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="sortine-by-angle"><a class="header" href="#sortine-by-angle">Sortine by Angle</a></h1>
-<p><img src="./images/unsorted.png" alt="Unsorted list of rays" title="Our collection of rays unsorted" /></p>
-<p>At this point, we've created a collection of rays emanating from \(P\). Our goal will be to find where these rays intersect with the line segments blocking our view, and then connect the adjacent intersection points to create a sequence of triangles which represent our field of view. To do this, we'll need to sort our collection of rays via increasing angle so that we'll know which rays are neighbors.</p>
-<p><img src="./images/sorted.png" alt="Sorted list of rays" title="Our collection of rays now sorted" /></p>
+                        <h1 id="sorting-by-angle"><a class="header" href="#sorting-by-angle">Sorting by Angle</a></h1>
+<p><img src="./images/unsorted.png" alt="Unsorted list of rays" title="Our collection of rays with their indices, unsorted" /></p>
+<p>At this point, we've created a collection of rays emanating from \(P\), all of which lie within our viewing angle. Our goal will be to find where these rays intersect with the line segments blocking our view, and then connect the adjacent intersection points to create a sequence of triangles which represent our field of view. To do this, we'll need to sort our collection of rays via increasing angle so that we'll know which rays are neighbors.</p>
+<p><img src="./images/sorted.png" alt="Sorted list of rays" title="Our collection of rays with their indices, now sorted" /></p>
 <h2 id="sorting-by-vector-components"><a class="header" href="#sorting-by-vector-components">Sorting by Vector Components</a></h2>
 <p>We're going to use dot products to avoid computing angles. Recall that, given two vectors \(\vec{n}\) and \(\vec{m}\), the component of \(\vec{n}\) in the direction of \(\vec{m}\) is given by \(\frac{\vec{n}\cdot\vec{m}}{|\vec{m}|}\).</p>
 <p><img src="./images/projection.png" alt="Vector projection" title="An example of vector projection" /></p>
