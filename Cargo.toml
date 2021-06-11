@@ -1,5 +1,5 @@
 [package]
-name = "line-of-sight"
+name = "line_of_sight"
 version = "0.1.0"
 authors = ["basstabs <babsstabs@gmail.com>"]
 edition = "2018"
@@ -9,3 +9,12 @@ edition = "2018"
 [dependencies]
 ggez = "0.6.0-rc1" # Need this to avoid mouse over bug causing panic
 glam = {version = "0.15", features = ["mint"]}
+rand = "0.8"
+fast_inv_sqrt = "~1.0"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "comparisons"
+harness = false

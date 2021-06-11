@@ -2,6 +2,20 @@ use std::ops::{Add, Sub};
 
 pub const FLOATING_POINT_ERROR: f32 = 0.0001;
 
+fn normalize_angle(angle: f32) -> f32
+{
+
+    if angle < 0.0
+    {
+
+        return angle + 2.0 * std::f32::consts::PI;
+
+    }
+
+    return angle;
+
+}
+
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Point
 {
@@ -58,6 +72,26 @@ impl Point
 
 	}
     //ANCHOR_END: exclusion
+
+    pub fn ray_between_atan(&self, lower: f32, upper: f32) -> bool
+    {
+
+        let tan = normalize_angle(self.y.atan2(self.x));
+
+        if upper > lower
+        {
+
+            return tan < upper && tan > lower;
+
+        }
+        else
+        {
+
+            return tan > lower || tan < upper;
+
+        }
+
+    }
 
     // ANCHOR: sorting_function
 	//Works so long as all represented angles are between lower and lower+pi
@@ -263,6 +297,40 @@ mod tests
 
 	}
     // ANCHOR_END: ray_test
+
+    #[test]
+    fn ray_between_atan()
+    {
+
+		let ray1 = Point { x: 2.5, y: 0.0 };
+		let ray2 = Point { x: 0.0, y: 1.0 };
+		let ray3 = Point { x: -1.0, y: 2.0 };
+		let ray4 = Point { x: -1.0, y: -1.1 };
+		let ray5 = Point { x: 3.7, y: -2.0 };
+		let ray6 = Point { x: -2.0, y: 0.0 };
+		let ray7 = Point { x: 0.0, y: -30.0 };
+		let ray8 = Point { x: 10.0, y: 1.0 };
+
+        let tan1 = normalize_angle(ray1.y.atan2(ray1.x));
+        let tan2 = normalize_angle(ray2.y.atan2(ray2.x));
+        let tan3 = normalize_angle(ray3.y.atan2(ray3.x));
+        let tan4 = normalize_angle(ray4.y.atan2(ray4.x));
+        let tan5 = normalize_angle(ray5.y.atan2(ray5.x));
+        let tan6 = normalize_angle(ray6.y.atan2(ray6.x));
+        let tan7 = normalize_angle(ray7.y.atan2(ray7.x));
+        let tan8 = normalize_angle(ray8.y.atan2(ray8.x));
+
+        assert!(ray8.ray_between_atan(tan1, tan2));
+		assert!(ray6.ray_between_atan(tan3, tan4));
+		assert!(ray5.ray_between_atan(tan7, tan1));
+		assert!(ray4.ray_between_atan(tan3, tan5));
+
+		assert!(!ray3.ray_between_atan(tan1, tan2));
+		assert!(!ray1.ray_between_atan(tan3, tan4));
+		assert!(!ray2.ray_between_atan(tan7, tan1));
+		assert!(!ray8.ray_between_atan(tan3, tan5));
+
+    }
 
     // ANCHOR: raycast_test
 	#[test]
